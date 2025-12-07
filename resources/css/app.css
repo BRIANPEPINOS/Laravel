@@ -12,3 +12,27 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+/* GRID DE TARJETAS */
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+/* TARJETA */
+.post-card {
+    padding: 1rem;
+    border-radius: 8px;
+    background: var(--card-background, #1e1e1e);
+    border: 1px solid #333;
+}
+
+/* IMAGEN MINIATURA */
+.post-card img {
+    width: 100%;
+    max-height: 180px;
+    object-fit: cover;
+    border-radius: 6px;
+    display: block;
+    margin: auto;
+}
