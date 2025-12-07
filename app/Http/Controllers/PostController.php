@@ -23,6 +23,7 @@ class PostController extends Controller
         $data = $request->validate([
             'title'   => 'required|string|max:255',
             'content' => 'required|string',
+             'image_url' => 'nullable|url|max:255',
         ]);
 
         $data['user_id'] = auth()->id();
@@ -48,6 +49,7 @@ class PostController extends Controller
         $data = $request->validate([
             'title'   => 'required|string|max:255',
             'content' => 'required|string',
+             'image_url' => 'nullable|url|max:255',
         ]);
 
         $post->update($data);

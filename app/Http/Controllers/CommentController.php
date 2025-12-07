@@ -10,21 +10,13 @@ class CommentController extends Controller
 {
     public function store(Request $request, Post $post)
     {
-        $rules = [
+        // Solo validar contenido, ya que siempre habrá user logueado
+        $data = $request->validate([
             'content' => 'required|string',
-        ];
+        ]);
 
-        if (!auth()->check()) {
-            $rules['guest_name'] = 'required|string|max:255';
-            $rules['guest_email'] = 'nullable|email|max:255';
-        }
-
-        $data = $request->validate($rules);
         $data['post_id'] = $post->id;
-
-        if (auth()->check()) {
-            $data['user_id'] = auth()->id();
-        }
+        $data['user_id'] = auth()->id(); //  siempre hay usuario
 
         Comment::create($data);
 

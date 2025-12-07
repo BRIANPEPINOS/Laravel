@@ -8,13 +8,6 @@ use App\Http\Controllers\Admin\UserController;
 // Home del blog (lista de posts)
 Route::get('/', [PostController::class, 'index'])->name('home');
 
-// Detalle de un post
-Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
-
-// Comentarios públicos
-Route::post('/posts/{post}/comments', [CommentController::class, 'store'])
-    ->name('comments.store');
-
 // Rutas protegidas por login
 Route::middleware(['auth'])->group(function () {
 
@@ -31,5 +24,22 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+// Detalle de un post
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show')
+->whereNumber('post');  
+
+// Comentarios públicos
+Route::post('/posts/{post}/comments', [CommentController::class, 'store'])
+    ->name('comments.store')
+    ->whereNumber('post')
+    ->middleware('auth');  
+
+Route::get('/home', function () {
+    return redirect()->route('home'); // nuestra home es "/"
+});
+
+
 // Rutas de autenticación de laravel/ui
 Auth::routes();
+
+
